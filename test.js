@@ -9,3 +9,4 @@
 // function rotateRight
 // function validateStep
 // function createRoboDom
+// create a robo look like content

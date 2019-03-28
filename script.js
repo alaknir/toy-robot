@@ -13,7 +13,7 @@
       tableRowCells.push("<tr>");
       var cell = noOfSquare;
       while (cell !== -1) {
-        tableRowCells.push('<td coordiantes="' + row + "," + cell + '"> ');
+        tableRowCells.push('<td coordiantes="' + cell + "," + row + '"> ');
         tableRowCells.push("</td>");
         cell--;
       }
@@ -32,16 +32,17 @@
       return;
     }
 
-    var getRoboElement = document.querySelector(".robo");
-    if (getRoboElement) {
-      getRoboElement.parentNode.removeChild(getRoboElement);
+    var robotElement = getRobotElement();
+    if (robotElement) {
+      robotElement.parentNode.removeChild(robotElement);
     }
 
-    var roboElement = [];
-    roboElement.push('<div class="robo ' + direction + ' ">');
-    roboElement.push(" ");
-    roboElement.push("</div>");
-    getCellWithCoodinates.innerHTML = roboElement.join("");
+    var robotElementArray = [];
+    robotElementArray.push('<div class="robot ' + direction + ' ">');
+    robotElementArray.push("<div class='robot-head'></div>");
+    robotElementArray.push("<div class='robot-legs'></div>");
+    robotElementArray.push("</div>");
+    getCellWithCoodinates.innerHTML = robotElementArray.join("");
   }
 
   renderLayout();
@@ -51,18 +52,20 @@
 
   // move the robot by 1 place
   function move() {
+    var maxMoveLimit = noOfSquare;
+    var minMoveLimit = 0;
     switch (f) {
       case "EAST":
-        x -= 1;
+        x = x >= maxMoveLimit ? maxMoveLimit : x + 1;
         break;
       case "WEST":
-        x += 1;
+        x = x <= minMoveLimit ? minMoveLimit : x - 1;
         break;
       case "NORTH":
-        y += 1;
+        y = y >= maxMoveLimit ? maxMoveLimit : y + 1;
         break;
       case "SOUTH":
-        y -= 1;
+        y = y <= minMoveLimit ? minMoveLimit : y - 1;
         break;
     }
     var position = x + "," + y + " " + f;
@@ -76,10 +79,10 @@
     var direction = splitPostion[1];
     if (isValidPosition(coordiantes, direction)) {
       var splitCoordinates = getSplitCoordinates(coordiantes);
-      x = splitCoordinates.xCordinates;
-      y = splitCoordinates.yCordinates;
-      f = direction;
-      createAndPlaceRobo(coordiantes, direction);
+      x = splitCoordinates.xCordinates || x;
+      y = splitCoordinates.yCordinates || y;
+      f = direction || f;
+      createAndPlaceRobo(x + "," + y, f);
     }
   }
 
@@ -87,22 +90,24 @@
   function rotateLeft() {
     var directionNumber = directionList.indexOf(f);
     var nextDirection = directionList[directionNumber - 1];
-    if (nextDirection < 0) {
+    if (!nextDirection) {
       f = directionList[directionList.length - 1];
     } else {
       f = directionList[directionNumber - 1];
     }
+    updateDirection();
   }
 
   // Rotate the robo to 90 degree based on the arrow pressed
   function rotateRight() {
     var directionNumber = directionList.indexOf(f);
     var nextDirection = directionList[directionNumber + 1];
-    if (nextDirection === directionList.length) {
+    if (!nextDirection) {
       f = directionList[0];
     } else {
       f = directionList[directionNumber + 1];
     }
+    updateDirection();
   }
 
   // Rotate the robo to 90 degree based on the arrow pressed
@@ -137,6 +142,15 @@
       xCordinates: xCordinates,
       yCordinates: yCordinates
     };
+  }
+
+  function getRobotElement() {
+    return document.querySelector(".robot");
+  }
+
+  function updateDirection() {
+    var robotElement = getRobotElement();
+    robotElement.setAttribute("class", "robot " + f);
   }
 
   // handle button click events
