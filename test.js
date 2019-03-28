@@ -8,3 +8,4 @@
 // function rotateLeft
 // function rotateRight
 // function validateStep
+// function createRoboDom
