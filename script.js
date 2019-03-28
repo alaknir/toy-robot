@@ -22,6 +22,8 @@
     tableLayout.innerHTML = tableRowCells.join("");
   }
   renderLayout();
+  // SOUTH WEST most cornet facing NORTH
+  place("0,0 NORTH");
 
   // move the robot by 1 place
   function move() {
@@ -39,13 +41,18 @@
         y -= 1;
         break;
     }
-    var position = x + "" + y + " " + direction;
+    var position = x + "," + y + " " + f;
     place(position);
   }
 
   // Placing the robot in a position
   function place(position) {
-    isValidPosition(position);
+    var splitPostion = position.trim().split(" ");
+    var coordiantes = splitPostion[0];
+    var direction = splitPostion[1];
+    if (isValidPosition(coordiantes, direction)) {
+      // place the robo
+    }
   }
 
   // Rotate the robo to 90 degree based on the arrow pressed
@@ -71,13 +78,26 @@
   }
 
   // Rotate the robo to 90 degree based on the arrow pressed
-  function report() {}
-
-  // get the possible next directions
-  function getPossibleDirections() {}
+  function report() {
+    alert(x + "," + y + " " + f);
+  }
 
   // check if the position is valid
-  function isValidPosition(position) {}
+  function isValidPosition(coordiantes, direction) {
+    var isValid = true;
+    var splitCoordinates = coordiantes.split(",");
+    var xCordinates = parseInt(splitCoordinates[0], 10);
+    var yCordinates = parseInt(splitCoordinates[1], 10);
+    if (
+      xCordinates + 1 > noOfSquare ||
+      xCordinates - 1 < 0 ||
+      yCordinates + 1 > noOfSquare ||
+      yCordinates - 1 < 0
+    ) {
+      isValid = false;
+    }
+    return isValid;
+  }
 
   // document.addEventListener("keypress", change);
   document.addEventListener("click", function(eve) {

@@ -7,5 +7,4 @@
 // function place
 // function rotateLeft
 // function rotateRight
-// function getPossibleDirections
 // function validateStep
