@@ -1,6 +1,7 @@
 .command-text {
   width: 50%;
   height: 50px;
+  font-size: 100%;
 }
 
 table.layout {

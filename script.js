@@ -20,17 +20,58 @@
     }
     tableLayout.innerHTML = tableRowCells.join("");
   }
+  renderLayout();
 
   // move the robot by 1 place
   function move() {}
 
   // Placing the robot in a position
-  function place() {}
+  function place(position) {}
 
   // Rotate the robo to 90 degree based on the arrow pressed
-  function rotate() {}
+  function rotateLeft() {}
 
-  renderLayout();
+  // Rotate the robo to 90 degree based on the arrow pressed
+  function rotateRight() {}
 
-  document.addEventListener("keypress", change);
+  // Rotate the robo to 90 degree based on the arrow pressed
+  function report() {}
+
+  // get the possible next directions
+  function getPossibleDirections() {}
+
+  // document.addEventListener("keypress", change);
+  document.addEventListener("click", function(eve) {
+    var targetId = eve.target.id;
+    switch (targetId) {
+      case "place":
+        {
+          var position = window.prompt(
+            "Please enter position and robo facing direction in patter X,Y,F \n X(1 to 5),Y(1 to 5) and F is the direction EAST WEST NORT SOUTH"
+          );
+          place(position);
+        }
+        break;
+      case "move":
+        {
+          move();
+        }
+        break;
+      case "report":
+        {
+          report();
+        }
+        break;
+      case "rotate-left":
+        {
+          rotateLeft();
+        }
+        break;
+      case "rotate-right":
+        {
+          rotateRight();
+        }
+        break;
+    }
+  });
 })();
