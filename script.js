@@ -11,7 +11,7 @@
       tableRowCells.push("<tr>");
       var cell = noOfSquare;
       while (cell !== -1) {
-        tableRowCells.push('<td coordiantes="' + row + "," + cell + '">');
+        tableRowCells.push('<td coordiantes="' + row + "," + cell + '"> ');
         tableRowCells.push("</td>");
         cell--;
       }

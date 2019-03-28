@@ -1,0 +1,14 @@
+.command-text {
+  width: 50%;
+  height: 50px;
+}
+
+table.layout {
+  width: 75%;
+  border: 5px solid #000;
+  margin: 0 auto;
+}
+.layout td {
+  border: 1px solid #000;
+  height: 100px;
+}
