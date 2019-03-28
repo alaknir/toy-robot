@@ -3,6 +3,7 @@
   var x = 0;
   var y = 0;
   var f = "SOUTH";
+  var directionList = ["EAST", "WEST", "NORTH", "SOUTH"];
   function renderLayout() {
     var tableLayout = document.getElementById("layout");
     var tableRowCells = [];
@@ -23,22 +24,60 @@
   renderLayout();
 
   // move the robot by 1 place
-  function move() {}
+  function move() {
+    switch (f) {
+      case "EAST":
+        x -= 1;
+        break;
+      case "WEST":
+        x += 1;
+        break;
+      case "NORTH":
+        y += 1;
+        break;
+      case "SOUTH":
+        y -= 1;
+        break;
+    }
+    var position = x + "" + y + " " + direction;
+    place(position);
+  }
 
   // Placing the robot in a position
-  function place(position) {}
+  function place(position) {
+    isValidPosition(position);
+  }
 
   // Rotate the robo to 90 degree based on the arrow pressed
-  function rotateLeft() {}
+  function rotateLeft() {
+    var directionNumber = directionList.indexOf[f];
+    var nextDirection = directionList[directionNumber - 1];
+    if (nextDirection < 0) {
+      f = directionList[directionList.length - 1];
+    } else {
+      f = directionList[directionNumber - 1];
+    }
+  }
 
   // Rotate the robo to 90 degree based on the arrow pressed
-  function rotateRight() {}
+  function rotateRight() {
+    var directionNumber = directionList.indexOf[f];
+    var nextDirection = directionList[directionNumber + 1];
+    if (nextDirection === directionList.length) {
+      f = directionList[0];
+    } else {
+      f = directionList[directionNumber + 1];
+    }
+  }
 
   // Rotate the robo to 90 degree based on the arrow pressed
   function report() {}
 
   // get the possible next directions
   function getPossibleDirections() {}
+
+  // check if the position is valid
+  function isValidPosition(position) {}
 
   // document.addEventListener("keypress", change);
   document.addEventListener("click", function(eve) {
