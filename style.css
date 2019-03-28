@@ -1,5 +1,5 @@
-.command-text {
-  width: 50%;
+.command-text,
+button {
   height: 50px;
   font-size: 100%;
 }

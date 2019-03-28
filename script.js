@@ -28,10 +28,6 @@
       '[coordiantes="' + coordiantes + '"]'
     );
 
-    if (getCellWithCoodinates.childElementCount > 0) {
-      return;
-    }
-
     var robotElement = getRobotElement();
     if (robotElement) {
       robotElement.parentNode.removeChild(robotElement);
@@ -180,6 +176,34 @@
     }
   }
 
+  function handleKeyPress(eve) {
+    var charCode = eve.charCode;
+    if (charCode === 13) {
+      var textBoxValue = (eve.target.value || "").toUpperCase();
+      switch (textBoxValue) {
+        case "MOVE":
+          move();
+          break;
+        case "LEFT":
+          rotateLeft();
+          break;
+        case "RIGHT":
+          rotateRight();
+          break;
+        case "REPORT":
+          report();
+        default:
+          if (textBoxValue.indexOf("PLACE") !== -1) {
+            place(textBoxValue.replace("PLACE", "").trim());
+          }
+      }
+    }
+  }
+
   // document.addEventListener("keypress", change);
   document.addEventListener("click", handleButtonClick);
+  // on enter after typing on the text box
+  document
+    .getElementById("command-palette")
+    .addEventListener("keypress", handleKeyPress);
 })();
