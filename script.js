@@ -41,10 +41,11 @@
     getCellWithCoodinates.innerHTML = robotElementArray.join("");
   }
 
-  renderLayout();
-
-  // Intial position SOUTH WEST most cornet facing NORTH
-  place("0,0 NORTH");
+  function init() {
+    renderLayout();
+    // Intial position SOUTH WEST most cornet facing NORTH
+    place("0,0 NORTH");
+  }
 
   // move the robot by 1 place
   function move() {
@@ -199,6 +200,9 @@
       }
     }
   }
+
+  // initialization
+  init();
 
   // document.addEventListener("keypress", change);
   document.addEventListener("click", handleButtonClick);
