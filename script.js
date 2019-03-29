@@ -5,6 +5,12 @@
   var f = "";
   var directionList = ["EAST", "NORTH", "WEST", "SOUTH"];
 
+  function init() {
+    renderLayout();
+    // Intial position SOUTH WEST most cornet facing NORTH
+    place("0,0 NORTH");
+  }
+
   function renderLayout() {
     var tableLayout = document.getElementById("layout");
     var tableRowCells = [];
@@ -23,6 +29,20 @@
     tableLayout.innerHTML = tableRowCells.join("");
   }
 
+  // Placing the robot in a position
+  function place(position) {
+    var splitPostion = position.trim().split(" ");
+    var coordiantes = splitPostion[0];
+    var direction = splitPostion[1];
+    if (isValidPosition(coordiantes, direction)) {
+      var splitCoordinates = getSplitCoordinates(coordiantes);
+      x = splitCoordinates.xCordinates || x;
+      y = splitCoordinates.yCordinates || y;
+      f = direction || f;
+      createAndPlaceRobo(x + "," + y, f);
+    }
+  }
+
   function createAndPlaceRobo(coordiantes, direction) {
     var getCellWithCoodinates = document.querySelector(
       '[coordiantes="' + coordiantes + '"]'
@@ -39,12 +59,6 @@
     robotElementArray.push("<div class='robot-legs'></div>");
     robotElementArray.push("</div>");
     getCellWithCoodinates.innerHTML = robotElementArray.join("");
-  }
-
-  function init() {
-    renderLayout();
-    // Intial position SOUTH WEST most cornet facing NORTH
-    place("0,0 NORTH");
   }
 
   // move the robot by 1 place
@@ -67,20 +81,6 @@
     }
     var position = x + "," + y + " " + f;
     place(position);
-  }
-
-  // Placing the robot in a position
-  function place(position) {
-    var splitPostion = position.trim().split(" ");
-    var coordiantes = splitPostion[0];
-    var direction = splitPostion[1];
-    if (isValidPosition(coordiantes, direction)) {
-      var splitCoordinates = getSplitCoordinates(coordiantes);
-      x = splitCoordinates.xCordinates || x;
-      y = splitCoordinates.yCordinates || y;
-      f = direction || f;
-      createAndPlaceRobo(x + "," + y, f);
-    }
   }
 
   // Rotate the robo to 90 degree based on the arrow pressed
