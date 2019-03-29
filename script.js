@@ -201,13 +201,18 @@
     }
   }
 
+  function bindActions() {
+    // document.addEventListener("keypress", change);
+    document.addEventListener("click", handleButtonClick);
+    // on enter after typing on the text box
+    document
+      .getElementById("command-palette")
+      .addEventListener("keypress", handleKeyPress);
+  }
+
   // initialization
   init();
 
-  // document.addEventListener("keypress", change);
-  document.addEventListener("click", handleButtonClick);
-  // on enter after typing on the text box
-  document
-    .getElementById("command-palette")
-    .addEventListener("keypress", handleKeyPress);
+  // binding events
+  bindActions();
 })();
